@@ -1,0 +1,157 @@
+.menubar {
+	padding-top: 100px;
+}
+
+.content {
+	padding-top: 80px;
+}
+
+.profile_pic {
+	border-radius: 50%;
+}
+
+.myname {
+	font-size: 22px; 
+	font-variant: small-caps;
+	font-weight: normal;
+	transform: scale(1, 1.2);
+	letter-spacing: 0.15em;
+	color: #2F4F4F !important;
+	float:left;
+	text-align:left;
+}
+
+.menuitem {
+	padding: 5px;
+	float:right;
+	text-align:right;
+	font-weight: lighter;
+	font-variant: small-caps;
+}
+
+.profileitem {
+	padding-top: 20px;
+	padding-right: 15px;
+	float:left;
+	text-align:left;
+	font-weight: lighter;
+	font-variant: small-caps;
+	line-height:1.2em;
+	color:#9FAFAF;
+}
+
+.container {
+	width: 200;
+}
+
+.container2 {
+	width: 266;
+}
+
+.overlay {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 15;
+	right: 0;
+	height: 100%;
+	width: 200;
+	opacity: 0;
+	transition: 0.5s ease;
+	background-color: #000000;
+}
+
+.overlay2 {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 15;
+	right: 0;
+	height: 100%;
+	width: 266;
+	opacity: 0;
+	transition: 0.5s ease;
+	background-color: #2F4F4F;
+}
+
+.overlay3 {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 15;
+	right: 0;
+	height: 100%;
+	width: 270;
+	opacity: 0;
+	transition: 0.5s ease;
+	background-color: #000000;
+}
+
+.container:hover .overlay {
+	opacity: 0.8;
+}
+
+.container:active .overlay {
+	opacity: 1;
+}
+
+.container2:hover .overlay2 {
+	opacity: 0.6;
+}
+
+.container2:active .overlay2 {
+	opacity: 1;
+}
+
+.container2:hover .overlay3 {
+	opacity: 0.8;
+}
+
+.container2:active .overlay3 {
+	opacity: 1;
+}
+
+.hovertext {
+  color: white; /* white */
+  font-size: 20px;
+  font-weight: lighter;
+  line-height:1.5em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+p {
+	color: #2F4F4F;
+	font-weight: lighter;
+	line-height:1.5em;
+}
+
+a {
+	/*color: #BFBFBF;*/
+	color: #9FAFAF;
+}
+
+/* unvisited link */
+a:link {
+  text-decoration: none;
+  font-weight: lighter;
+}
+
+/* mouse over link */
+a:hover {
+  color: black;
+  font-weight: lighter;
+  text-decoration: none;
+}
+
+/* selected link */
+a:active {
+  color: black;
+  font-weight: lighter;
+  text-decoration: none;
+}
