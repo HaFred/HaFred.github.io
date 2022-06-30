@@ -1,0 +1,308 @@
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>COMP 5421 Project</title>
+<link href='http://fonts.googleapis.com/css?family=Nunito:300|Crimson+Text|Droid+Sans+Mono' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" title="Default" href="styles/github.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>  
+
+<link rel="stylesheet" href="highlighting/styles/default.css">
+<script src="highlighting/highlight.pack.js"></script>
+
+<style type="text/css">
+body {
+	margin: 0px;
+	width: 100%;
+	font-family: 'Crimson Text', serif;
+	font-size: 20px;
+	background: #fcfcfc;
+}
+h1 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 28px;
+	margin: 25px 0px 0px 0px;
+}
+
+h2 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 32px;
+	margin: 15px 0px 35px 0px;
+	color: #333;	
+	word-spacing: 3px;
+}
+
+h3 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 26px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+h4 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 22px;
+	margin: 10px 0px 10px 0px;
+	color: #333;
+	word-spacing: 2px;
+}
+
+h5 {
+	font-family: 'Nunito', sans-serif;
+	font-weight: normal;
+	font-size: 18px;
+	margin: 10px 0px 10px 0px;
+	color: #111;
+	word-spacing: 2px;
+}
+
+p, li {
+	color: #444;
+}
+
+a {
+	color: #DE3737;
+}
+
+.container {
+	margin: 0px auto 0px auto;
+	width: 960px;
+}
+
+#header {
+	background: #333;
+	width: 100%;
+}
+
+#headersub {
+	color: #ccc;
+	width: 960px;
+	margin: 0px auto 0px auto;
+	padding: 20px 0px 20px 0px;
+}
+
+.chart {
+	width: 480px;
+}
+.lol {
+	font-size: 16px;
+	color: #888;
+	font-style: italic;
+}
+.sep {
+	height: 1px;
+	width: 100%;
+	background: #999;
+	margin: 20px 0px 20px 0px;
+}
+.footer{
+	font-size: 16px;
+}
+.latex {
+	width: 100%;
+}
+
+.latex img {
+	display: block;
+	margin: 0px auto 0px auto;
+}
+
+pre {
+	font-family: 'Droid Sans Mono';
+	font-size: 14px;
+}
+
+td img {
+  vertical-align: middle;
+}
+
+#contents a {
+}
+</style>
+<script type="text/javascript">
+    hljs.initHighlightingOnLoad();
+</script>
+</head>
+<body>
+<div id="header" >
+<div id="headersub">
+<!--<h1><span style="color: #DE3737"> Frederick Ziyang Hong </span></h1>-->
+</div>
+</div>
+<div class="container">
+
+<h2>Image Matching Based on Local Features</h2>
+
+<div style="float: right; padding: 20px">
+<img src="project/pics/notre_teaser_final.jpg" width="350pixels"/>
+
+<p style="font-size: 16px" align="center">Fig. 1. Interest points on Notre Dame</p>
+</div>
+
+<h2>Overview</h2>
+<p> The goal of this project is to create a local feature matching algorithm using techniques described in Chapter 4.1, Szeliski [4]. So, you may wonder, what are local features? As you can see in Fig. 1, these local feature points are nothing but corners and edges. Correctly utilizing these feature points can help you match the backend receptive view features, such that you can further implement some frontend computer vision tasks, such as image-stitching, image perception, etc. The pipeline I used is a simplified version of the famous scale-invariant feature transform (SIFT) pipeline. The matching pipeline is intended to work for instance-level matching multiple views of the same physical scene. Coming from a double-E background, I am particularly interested in the deployment efficiency of diverse algorithms. Therefore, I will give some analysis on the design choices in the following. For further readings, please refer to the references I listed at the end of this article. The contents of this article are as follows.</p>
+
+<ol><i>
+<li >Interest Point Detection</li>
+<li>Local Feature Description</li>
+<li>Feature Matching</li>
+<li>Matching Results</li>
+<li>Bells & Whistles</li>
+<li>Conclusion</li>
+</i></ol>
+
+<br>
+<div style="clear:both">
+<h3>1. Interest Point Detection</h3>
+    <p id="interest_pt">
+        To start with, the Harris corner detector is implemented so as to extract interest points from the raw images. The first step is to compute the Gaussian derivative (DoG) on the raw image with the Sobel filter and Gaussian filter. Here I used <code>cv2.Sobel()</code> rather than directly handcrafting one. Even though the logic behind the Sobel filter is simple, the handcrafted Sobel tends to leave a huge gradient vector along the border, and its implementation efficiency is also bad. All these are not desired. Next, the Hessian matrix can be computed with the DoG and its partial components. Then the response of the local auto-correlation function [1] can be computed by the eigenvalues of the Hessian matrix. Instead of explicitly computing eigenvalues, I used the approximation as the following snippet to return the response.
+    </p>
+    <pre><code>
+    <span class="comment"># hessian matrix, directly take grad to compute response</span>
+    k = 0.05  <span class="comment"># empirical constant in corner response equation</span>
+    det = grad_xx * grad_yy - grad_xy ** 2
+    trace = grad_xx + grad_yy
+    response = det - k * trace ** 2
+    </code></pre>
+    <p>
+        With the response, the overall interest points can be extracted by simply filtering out the response. However, the notorious uneven distribution issue of most of the feature detectors occurs. Therefore, I adopted adaptive non-maximal suppression (ANMS) [2] to mitigate this issue. First, set up a target amount of interest points as <code>n_pts</code> to be retained. Then erase all the responses that are under the median for efficiency. Also, remove the interest points border with a window size to avoid the not-a-number error in the magnitude computation in the sift pipeline. Then the x and y coordinates of these <code>n_pts</code> interest points can be extracted. In fact, I did attempt a naive non-maximal suppression and tweaked the optimal radius for interest points filtering, and ended up with <code>radius = 7</code> as the optima. It is faster than ANMS, but the ultimate accuracy is only 85% on the Notre Dame image pair, which is not as good as the ANMS one.
+    </p>
+    <p>
+        Next, I iterated the selected corner points according to their response, to calculate the minimal radius of which between each corner point and its bigger response neighbors. And then I sorted the radius list using The <code>np.argpartition()</code> rather than <code>np.argsort()</code>, because we only care about the top <code>n_pts</code> largest distance interest points given the response array, but not their sequence. So the former provides higher implementation efficiency compared to the latter. Please refer to this <a href="https://numpy.org/doc/stable/reference/generated/numpy.argpartition.html">numpy manual</a> for details. In this project, I used <code>np.argpartition()</code> when I don't care about the sorting sequence for finding maxima or minima. Another thing is about <code>n_pts</code>, basically the more the merrier, but it takes a longer time for processing. It is a trade-off and should be determined on a case-by-case basis. Here I set <code>n_pts = 1500</code> following the project deliverable readme.
+    </p>
+
+<div style="clear:both">
+    <div style="float: right; padding: 20px">
+    <img src="project/pics/orientations.jpg" width="350pixels"/>
+    <p style="font-size: 16px" align="center">Fig. 2. SIFT feature descriptors for some<br>random samples on Notre Dame</p>
+    </div>
+<br>
+<h3>2. Local Feature Description</h3>
+    <p id="local_feat">
+        To describe the <code>n_pts</code> interest points, I adopted a simplified version of the famous SIFT [3] pipeline. Taking the interest points generated in Sec. 1 together with the predetermined <code>feature_width</code>, I can calculate the gradient magnitudes and orientations on the targeted image which are shown in Fig. 2. For each corner point, the surrounding 16x16 image sample is shown in each box.
+    </p>
+    <p>And then for each interest point, the sample surrounding magnitude and orientation are calculated, so as to this sample region can be divided into a 4x4 grid. For each grid, calculate these 8-bin histograms and sum them up just as you can see in Fig. 2, and finally, I had the 128 (4x4x8) length feature vector describing the current interest point. Note that, here the feature width is fixed as 16, which means it lacks scale-invariant property, which further leads to the inferiority on diverse scales dataset, such as the Episcopal Gaudi one. After collecting all the feature vectors, aka. descriptors, for all the interest points, we are ready to match them in Sec. 3 of the pipeline.
+    </p>
+    <pre><code>
+    <span class="comment"># magnitude and orientation on img</span>
+    magnitudes = np.sqrt((grad_x ** 2 + grad_y ** 2))
+    orientations = np.arctan2(grad_y, grad_x)  <span class="comment"># angles in radian</span>
+    <br>
+    <span class="comment"># iterate k interest points and calculate feature vector respectively</span>
+    for i in range(len(x)):
+        <span class="comment"># magnitude and orientation of the interest pt</span>
+        magnitude = magnitudes[y_i - half_fw:y_i + half_fw, x_i - half_fw:x_i + half_fw]
+        orientation = orientations[y_i - half_fw:y_i + half_fw, x_i - half_fw:x_i + half_fw]
+    </code></pre>
+
+<br>
+<h3>3. Feature Matching</h3>
+<p id="feat_match"> In this section, I used the descriptor-coordinate pairs of each extracted interest point, with the nearest-neighbor distance ratio (NNDR) being implemented, to calculate the feature point matches and their corresponding confidences. Basically, two images' feature descriptors from a distance matrix pointwisely, and their the nearest and second nearest neighbor distances are used to compute NNDR. For efficiency, I used <code>scipy.spatial.distance.cdist()</code> for distance. If <code>NNDR < ratio</code> (here ratio is a hyperparameter) when considering the potential match between descriptor A in image1 and descriptor B in image2, A & B is determined as a match. NNDR works with the presumption that each feature descriptor in the image should be different i.e., their distance has the diversity less than the ratio. Only if two interest points from their respective images are two matching points, the distance between these two points the smallest. Since we have conducted ANMS in Sec. 1, NNDR here should be also less than the ratio for the ground truth matches. That is why we can use NNDR for matching features.
+</p>
+<!--<h2>Example of code with highlighting</h2>-->
+<!--The javascript in the <code>highlighting</code> folder is configured to do syntax highlighting in code blocks such as the one below.<p>-->
+
+<br>
+<h3>4. Matching Results</h3>
+<table border=1 id="results"><tbody>
+<tr>
+<td>
+<img src="project/pics/notre/vis_circles.jpg" width="100%"/>
+</td>
+<td>
+<img src="project/pics/notre/eval.jpg" width="100%"/>
+</td>
+</tr>
+
+<tr>
+<td align="center"> Fig. 3. Notre Dame with the distance Ratio of 0.8</td>
+<td align="center"> Fig. 4. Found 100/100 required matches, with an accuracy of 89%</td>
+</tr>
+
+<tr>
+<td>
+<img src="project/pics/mount/vis_circles.jpg" width="100%"/>
+</td>
+<td>
+<img src="project/pics/mount/eval.jpg" width="100%"/>
+</td>
+</tr>
+
+<tr>
+<td align="center"> Fig. 5. Mount Rushmore with the distance ratio of 0.8</td>
+<td align="center"> Fig. 6. Found 100/100 required matches, with an accuracy of 90%</td>
+</tr>
+
+<tr>
+<td>
+<img src="project/pics/gaudi/vis_circles.jpg" width="100%"/>
+</td>
+<td>
+<img src="project/pics/gaudi/eval.jpg"  width="100%"/>
+</td>
+</tr>
+
+<tr>
+<td align="center"> Fig. 7. Episcopal Gaudi with the distance ratio of 0.8</td>
+<td align="center"> Fig. 8. Found 12/100 required matches, with an accuracy of 1%</td>
+</tr>
+
+<tbody></table>
+
+<br>
+<h2>5. Bells & Whistles</h2>
+<h3>Feature Matching Acceleration using Principal Component Analysis</h3>
+<p id="pca">
+    To accelerate feature matching in Sec. 3, I implemented a principal component analysis (PCA) method to decompose the feature descriptors from 128 into 24. The matching results on Notre Dame are shown in Fig. 9 & 10. With 15% and 10% matching accuracy sacrifices for the data pairs of Notre Dame and Mount Rushmore respectively, we can have a 5x operation speed improvement in terms of elapsed time on average. Funny thing is that, if you take a look at Fig. 11 and Fig. 8, you will find that the decomposed matching result using PCA is actually better when we are testing on Episcopal Gaudi data. That is because this image pair has two different scaled images. With the help of PCA, the latent principal features in the descriptors can be extracted and mitigate the scale-variant issue. Since we have not implemented the variant scale input for the sift pipeline, here PCA plays an important role in restoring useful descriptors crossing different scales.
+</p>
+<pre><code>
+<span class="comment"># covariance matrix todo debug to prove this is cov</span>
+cov = np.cov(data, rowvar=False)
+<span class="comment"># eigenvalues and eigenvectors</span>
+alpha, v = np.linalg.eig(cov)
+<span class="comment"># select the top eigen todo analysis on the argpartition usage for sorting</span>
+idx = np.argpartition(-alpha, n_components)[:n_components]
+v = v.T[idx]
+<span class="comment"># decomposition</span>
+decom_fvs1 = np.dot(data, v.T)[:feature_vectors1.shape[0]]
+decom_fvs2 = np.dot(data, v.T)[feature_vectors1.shape[0]:]
+</code></pre>
+<table border=1><tbody>
+<tr>
+<td>
+<img src="project/pics/notre/eval_pca.jpg" width="100%"/>
+</td>
+<td>
+<img src="project/pics/mount/eval_pca.jpg" width="100%"/>
+</td>
+<td>
+<img src="project/pics/gaudi/eval_pca.jpg" width="100%"/>
+</td>
+</tr>
+
+<tr>
+<td align="center"> Fig. 9. Notre Dame with 100/100 matches, and an accuracy of 74%</td>
+<td align="center"> Fig. 10. Mount Rushmore with 100/100 matches, and an accuracy of 80%</td>
+<td align="center"> Fig. 11. Episcopal Gaudi with 57/100 matches, and an accuracy of 3%</td>
+</tr>
+<tbody></table>
+
+
+<br>
+<h2>6. Conclusion</h2>
+<p id="conclusion"> The performance on Episcopal Gaudi is bad due to the intense scale changing of the input image pair. This issue could be fixed by a multiple scales selection method on the feature points, which further determines an optimal feature width in Sec. 2 such that the descriptors could be built on multiple scales. But I haven't implemented this yet due to time limits, and this task (multiple scales selection and descriptors generation) will be left as future work.
+</p>
+
+<h2>References</h2>
+<ol>
+<li>Harris, Chris, and Mike Stephens. "A combined corner and edge detector." Alvey vision conference. Vol. 15. No. 50. 1988.</li>
+<li>Brown, Matthew, Richard Szeliski, and Simon Winder. "Multi-image matching using multi-scale oriented patches." 2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR'05). Vol. 1. IEEE, 2005.</li>
+<li>Lowe, David G. "Distinctive image features from scale-invariant keypoints." International journal of computer vision 60.2: 91-110, 2004.</li>
+<li>Szeliski, Richard. Computer vision: algorithms and applications. Springer Science & Business Media, 2010.</li>
+</ol>
+</div>
+
+</body>
+</html>
