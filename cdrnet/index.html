@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Website of Cross-Dimensional Refined Learning for Real-Time 3D Visual Perception from Monocular Video">
+  <meta name="keywords" content="Visual 3D Perception, 3D Reconstruction, 3D Semantic Labeling">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cross-Dimensional Refined Learning for Real-Time 3D Visual Perception from
+Monocular Video</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!--<nav class="navbar" role="navigation" aria-label="main navigation">-->
+<!--  <div class="navbar-brand">-->
+<!--    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">-->
+<!--      <span aria-hidden="true"></span>-->
+<!--      <span aria-hidden="true"></span>-->
+<!--      <span aria-hidden="true"></span>-->
+<!--    </a>-->
+<!--  </div>-->
+<!--  <div class="navbar-menu">-->
+<!--    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">-->
+<!--      <a class="navbar-item" href="https://hafred.com">-->
+<!--      <span class="icon">-->
+<!--          <i class="fas fa-home"></i>-->
+<!--      </span>-->
+<!--      </a>-->
+
+<!--      <div class="navbar-item has-dropdown is-hoverable">-->
+<!--        <a class="navbar-link">-->
+<!--          More Research-->
+<!--        </a>-->
+<!--        <div class="navbar-dropdown">-->
+<!--          <a class="navbar-item" href="https://hypernerf.github.io">-->
+<!--            HyperNeRF-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://nerfies.github.io">-->
+<!--            Nerfies-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://latentfusion.github.io">-->
+<!--            LatentFusion-->
+<!--          </a>-->
+<!--          <a class="navbar-item" href="https://photoshape.github.io">-->
+<!--            PhotoShape-->
+<!--          </a>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+
+<!--  </div>-->
+<!--</nav>-->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Cross-Dimensional Refined Learning for Real-Time 3D Visual Perception from
+Monocular Video</h1>
+          <p class="title">
+          <h1 style="color:#6e6e6e;"> ICCV 2023 Workshops</h1>
+          </p>
+          <hr>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://hafred.github.io">Frederick Ziyang Hong</a> and</span>
+            <span class="author-block">
+              <a href="https://seng.hkust.edu.hk/about/people/faculty/chik-patrick-yue">C. Patrick Yue</a></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Hong Kong University of Science and Technology</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href=""
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2303.09248"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=iJ2EizZYtVU"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <br>
+  <br>
+
+<!--  </div>-->
+<!--</section>-->
+
+<!--<section class="section">-->
+<!--  <div class="container is-max-desktop">-->
+
+    <!-- Topping Video -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/z_krQ0IpxEs?si=74P-lqZHzExm7wGt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div>
+    <!--/ Topping Video -->
+
+  <br>
+  <br>
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            We present a novel real-time capable learning method that jointly perceives a 3D scene’s geometry structure and semantic labels.
+          </p>
+          <p>
+            Recent approaches to real-time 3D scene reconstruction mostly adopt a volumetric scheme, where a Truncated Signed Distance Function (TSDF) is directly regressed. However, these volumetric approaches tend to focus on the global coherence of their reconstructions, which leads to a lack of local geometric detail. To overcome this
+issue, we propose to leverage the latent geometric prior knowledge in 2D image features by explicit depth prediction and anchored feature generation, to refine the occupancy learning in TSDF volume.
+          </p>
+          <p>
+            Besides, we find that this cross-dimensional feature refinement methodology can also be adopted for the semantic segmentation task by utilizing semantic priors. Hence, we proposed an end-to-end cross-dimensional refinement neural network (CDRNet) to extract both 3D mesh and 3D semantic labeling in real time. The experiment results show that this method achieves a state-of-the-art 3D perception efficiency on multiple datasets, which indicates the great potential of our method for industrial applications.
+          </p>
+        <hr>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!--Overall Pipeline-->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+<!--          <div class="columns is-centered has-text-centered">-->
+<!--            <div class="column is-four-fifths">-->
+            <center><h2 class="title is-3">Overall Pipeline</h2></center>
+            <div class="content has-text-justified">
+                <img class="img-fluid" src="./imgs/cdrnet_arch.jpg" alt="Framework" >
+              <p>
+                Posed RGB images from monocular videos are wrapped as fragment input for 2D feature extraction, which is used for both depth and 2D semantic predictions for cross-dimensional refinement purposes. To learn the foundational 3D geometry before conducting refinements, the extracted 2D features are back-projected into raw 3D features, $V_s$, in different resolutions without any 2D priors involved. At each resolution, after being processed by the GRU, the output feature $L_s$ in the local volume is further fed into Depth and Semantics refinement modules sequentially to have a 2D-prior-refined feature with better representations.
+              </p>
+            <hr>
+          </div>
+        </div>
+      </div>
+    <!--/ Overall Pipeline-->
+    <div class="columns is-centered">
+      <!-- Occupancy Refinement. -->
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">Occupancy Refinement</h2>
+          <p>
+            Both refinements are conducted in a sparse manner to achieve efficiency. The anchored voxel refinement for occupancy is done by back-projecting depth point predictions then leveraging as geometric priors.
+          </p>
+              <img class="img-fluid" src="./imgs/occ_refmnt.jpg" alt="Framework" >
+        </div>
+      </div>
+      <!--/ Occupancy Refinement. -->
+
+      <!-- Semantic Refinement. -->
+      <div class="column">
+        <h2 class="title is-3">Semantic Refinement</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              Semantic priors that lie in the 2D semantic prediction are imposed for the learning 3D semantics, which is proven to be beneficial to help the feature fitted for semantics and easier towards the convergence.
+            </p>
+              <img class="img-fluid" src="./imgs/semseg_refmnt.jpg" alt="Framework" >
+          </div>
+        </div>
+      </div>
+      <!--/ Semantic Refinement. -->
+    </div>
+
+    <!-- Convergence and Effectiveness. -->
+    <hr>
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Convergence and Effectiveness</h2>
+
+        <!-- Interpolating. -->
+        <h3 class="title is-4">Loss convergence with Prior</h3>
+        <div class="content has-text-justified">
+            <p>
+                With the help of CDR priors, the training process can be transformed from a maximum likelihood estimation (MLE) into a maximum a posteriori (MAP) perspective via Bayes’ rule, which eventually reaches a better convergence.
+            </p>
+            <p>
+                After the occupancy refinement, the occupancy grid is improved as visualized from the raw (pink) grid into the new (cyan) grid. The back-projected depth points in blue gets closer to the ground-truth back-projected depth points in green.
+            </p>
+        </div>
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="content has-text-justified">
+            <img src="./imgs/convergence.png"
+                 class="interpolation-image"
+            />
+          </div>
+        </div>
+        <br/>
+        <!--/ Interpolating. -->
+
+        <!-- Visualization. -->
+        <h3 class="title is-4">Visualization of the inference results</h3>
+        <div class="content has-text-justified">
+          <p>
+            Our method consistently outperforms baseline models and sometimes even surpasses the ground-truth labeling, e.g., in the bottom row, the photo-printed curtain above the bed is correctly recognized as
+“curtain” and “picture”, whereas the ground truth mistakes it as “other furniture”.
+          </p>
+        </div>
+          <div class="columns is-vcentered interpolation-panel">
+          <div class="content has-text-justified">
+            <img src="./imgs/semseg_vis.jpg"
+                 class="interpolation-image"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--/ Convergence and Effectiveness. -->
+  </div>
+</section>
+<hr>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+<!--    <h2 class="title">BibTeX</h2>-->
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code>@article{hong2023cross,
+  title={Cross-Dimensional Refined Learning for Real-Time 3D Visual Perception from Monocular Video},
+  author={Hong, Ziyang and Yue, C. Patrick},
+  journal={ICCVW},
+  year={2023}
+}    </code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="https://arxiv.org/abs/2303.09248">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/hafred" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+          <p>
+            The website template is borrowed from <a
+              href="https://github.com/nerfies/nerfies.github.io">Keunhong Park's Nerfies website</a>. Please contact Fred Hong for feedback and questions.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
