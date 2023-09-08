@@ -33,7 +33,7 @@ Monocular Video</title>
   <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/favicon.svg">
+  <link rel="icon" href="../favicon.ico">
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
@@ -165,7 +165,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
         <div class="content">
           <h2 class="title is-3">Occupancy Refinement</h2>
           <p>
-            Both refinements are conducted in a sparse manner to achieve efficiency. The anchored voxel refinement for occupancy is done by back-projecting depth point predictions then leveraging as geometric priors.
+            Both refinements are conducted in a sparse manner to achieve efficiency. The anchored voxel refinement for occupancy is done by back-projecting depth point predictions and then leveraging as geometric priors.
           </p>
               <img class="img-fluid" src="./imgs/occ_refmnt.jpg" alt="Framework" >
         </div>
@@ -178,7 +178,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
         <div class="columns is-centered">
           <div class="column content">
             <p>
-              Semantic priors that lie in the 2D semantic prediction are imposed for the learning 3D semantics, which is proven to be beneficial to help the feature fitted for semantics and easier towards the convergence.
+              Semantic priors that lie in the 2D semantic prediction are imposed for the learning of 3D semantics, which is proven to be beneficial to help the feature fit for semantics and easier towards the convergence.
             </p>
               <img class="img-fluid" src="./imgs/semseg_refmnt.jpg" alt="Framework" >
           </div>
@@ -200,7 +200,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
                 With the help of CDR priors, the training process can be transformed from a maximum likelihood estimation (MLE) into a maximum a posteriori (MAP) perspective via Bayes’ rule, which eventually reaches a better convergence.
             </p>
             <p>
-                After the occupancy refinement, the occupancy grid is improved as visualized from the raw (pink) grid into the new (cyan) grid. The back-projected depth points in blue gets closer to the ground-truth back-projected depth points in green.
+                After the occupancy refinement, the occupancy grid is improved as visualized from the raw (pink) grid into the new (cyan) grid. The back-projected depth points in blue get closer to the ground-truth back-projected depth points in green.
             </p>
         </div>
         <div class="columns is-vcentered interpolation-panel">
