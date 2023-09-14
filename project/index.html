@@ -155,7 +155,7 @@ td img {
 
 <br>
 <div style="clear:both">
-<h3>1. Interest Point Detection</h3>
+<h2>1. Interest Point Detection</h2>
     <p id="interest_pt">
         To start with, the Harris corner detector is implemented so as to extract interest points from the raw images. The first step is to compute the Gaussian derivative (DoG) on the raw image with the Sobel filter and Gaussian filter. Here I used <code>cv2.Sobel()</code> rather than directly handcrafting one. Even though the logic behind the Sobel filter is simple, the handcrafted Sobel tends to leave a huge gradient vector along the border, and its implementation efficiency is also bad. All these are not desired. Next, the Hessian matrix can be computed with the DoG and its partial components. Then the response of the local auto-correlation function [1] can be computed by the eigenvalues of the Hessian matrix. Instead of explicitly computing eigenvalues, I used the approximation as the following snippet to return the response.
     </p>
@@ -179,7 +179,7 @@ td img {
     <p style="font-size: 16px" align="center">Fig. 2. SIFT feature descriptors for some<br>random samples on Notre Dame</p>
     </div>
 <br>
-<h3>2. Local Feature Description</h3>
+<h2>2. Local Feature Description</h2>
     <p id="local_feat">
         To describe the <code>n_pts</code> interest points, I adopted a simplified version of the famous SIFT [3] pipeline. Taking the interest points generated in Sec. 1 together with the predetermined <code>feature_width</code>, I can calculate the gradient magnitudes and orientations on the targeted image which are shown in Fig. 2. For each corner point, the surrounding 16x16 image sample is shown in each box.
     </p>
@@ -198,14 +198,14 @@ td img {
     </code></pre>
 
 <br>
-<h3>3. Feature Matching</h3>
+<h2>3. Feature Matching</h2>
 <p id="feat_match"> In this section, I used the descriptor-coordinate pairs of each extracted interest point, with the nearest-neighbor distance ratio (NNDR) being implemented, to calculate the feature point matches and their corresponding confidences. Basically, two images' feature descriptors from a distance matrix pointwisely, and their the nearest and second nearest neighbor distances are used to compute NNDR. For efficiency, I used <code>scipy.spatial.distance.cdist()</code> for distance. If <code>NNDR < ratio</code> (here ratio is a hyperparameter) when considering the potential match between descriptor A in image1 and descriptor B in image2, A & B is determined as a match. NNDR works with the presumption that each feature descriptor in the image should be different i.e., their distance has the diversity less than the ratio. Only if two interest points from their respective images are two matching points, the distance between these two points the smallest. Since we have conducted ANMS in Sec. 1, NNDR here should be also less than the ratio for the ground truth matches. That is why we can use NNDR for matching features.
 </p>
 <!--<h2>Example of code with highlighting</h2>-->
 <!--The javascript in the <code>highlighting</code> folder is configured to do syntax highlighting in code blocks such as the one below.<p>-->
 
 <br>
-<h3>4. Matching Results</h3>
+<h2>4. Matching Results</h2>
 <table border=1 id="results"><tbody>
 <tr>
 <td>
