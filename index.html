@@ -13,26 +13,26 @@
 
 
 <script>
+	function loadPage(page, clickedLink) {
+		$(".menuitem a, .myname").removeClass("active");
+		$(clickedLink).addClass("active");
+		$("#content").fadeOut(150, function() {
+			$(this).load(page, function() {
+				$(this).fadeIn(200);
+			});
+		});
+	}
+
 	$(document).ready(function(){
-    $("#content").load("about.html");
-    $("#about").click(function(){
-        $("#content").load("about.html");
-    });
-    $("#project").click(function(){
-        $("#content").load("project/index.html");
-    });
-    $("#cv").click(function(){
-        $("#content").load("cv.html");
-    })
-    $("#research").click(function(){
-        $("#content").load("research.html");
-    });
-    $("#portfolio").click(function(){
-        $("#content").load("portfolio.html");
-    });
-    $("#blog").click(function(){
-        $("#content").load("blog.html");
-    });
+		$("#content").load("about.html");
+		$(".myname").addClass("active");
+
+		$("#about").click(function(){ loadPage("about.html", this); });
+		$("#project").click(function(){ loadPage("project/index.html", this); });
+		$("#cv").click(function(){ loadPage("cv.html", this); });
+		$("#research").click(function(){ loadPage("research.html", this); });
+		$("#portfolio").click(function(){ loadPage("portfolio.html", this); });
+		$("#blog").click(function(){ loadPage("blog.html", this); });
 	});
 </script>
 <meta name="description" content="PhD in Electronics & Computer Engineering at HKUST">

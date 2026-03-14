@@ -1,5 +1,14 @@
+/* Sticky header */
+#header {
+	position: sticky;
+	top: 0;
+	background: #fff;
+	z-index: 100;
+}
+
 .menubar {
-	padding-top: 100px;
+	padding-top: 30px;
+	padding-bottom: 10px;
 }
 
 .content {
@@ -27,6 +36,41 @@
 	text-align:right;
 	font-weight: lighter;
 	font-variant: small-caps;
+}
+
+/* Animated underline on nav links */
+.menuitem a {
+	position: relative;
+	display: inline-block;
+}
+
+.menuitem a::after {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 1px;
+	bottom: -2px;
+	left: 0;
+	background-color: #2F4F4F;
+	transition: width 0.25s ease;
+}
+
+.menuitem a:hover::after {
+	width: 100%;
+}
+
+/* Active nav state */
+.menuitem a.active {
+	color: #2F4F4F;
+}
+
+.menuitem a.active::after {
+	width: 100%;
+}
+
+/* Fade transition for content */
+#content {
+	padding-top: 60px;
 }
 
 .profileitem {
