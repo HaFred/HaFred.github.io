@@ -4,11 +4,12 @@
 	top: 0;
 	background: #fff;
 	z-index: 100;
+	padding-top: 20px;
 }
 
 .menubar {
-	padding-top: 30px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 
 .content {
