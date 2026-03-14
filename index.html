@@ -27,6 +27,7 @@
 		$("#content").load("about.html");
 		$(".myname").addClass("active");
 
+		$("#home").click(function(){ loadPage("about.html", this); });
 		$("#about").click(function(){ loadPage("about.html", this); });
 		$("#project").click(function(){ loadPage("project/index.html", this); });
 		$("#cv").click(function(){ loadPage("cv.html", this); });
@@ -49,7 +50,7 @@
 	<div class="mx-auto" style="width: 820px;">
 		<div class="menubar" style="display: flex; align-items: baseline; justify-content: space-between;">
 			<div>
-				<a class="myname" href="#" id="about">frederick ziyang hong</a>
+				<a class="myname" href="#" id="home">frederick ziyang hong</a>
 			</div>
 			<div style="display: flex; gap: 30px;">
 				<div class="menuitem"><a href="#" id="research">research</a></div>
