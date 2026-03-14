@@ -13,7 +13,7 @@
 }
 
 .content {
-	padding-top: 80px;
+	padding-top: 20px;
 }
 
 .profile_pic {
@@ -71,11 +71,11 @@
 
 /* Fade transition for content */
 #content {
-	padding-top: 60px;
+	padding-top: 20px;
 }
 
 .profileitem {
-	padding-top: 20px;
+	padding-top: 40px;
 	padding-right: 15px;
 	float:left;
 	text-align:left;
