@@ -18,9 +18,6 @@
     $("#about").click(function(){
         $("#content").load("about.html");
     });
-    $("#about2").click(function(){
-        $("#content").load("about.html");
-    });
     $("#project").click(function(){
         $("#content").load("project/index.html");
     });
@@ -33,8 +30,8 @@
     $("#portfolio").click(function(){
         $("#content").load("portfolio.html");
     });
-    $("#howtos").click(function(){
-        $("#content").load("howtos.html");
+    $("#blog").click(function(){
+        $("#content").load("blog.html");
     });
 	});
 </script>
@@ -50,25 +47,17 @@
 <!-- <div class="container" id="header"> -->
 <div id="header">
 	<div class="mx-auto" style="width: 820px;">
-		<div class="row menubar">
-			<div class="col-4" style="padding-right: 10px;">
+		<div class="menubar" style="display: flex; align-items: baseline; justify-content: space-between;">
+			<div>
 				<a class="myname" href="#" id="about">frederick ziyang hong</a>
 			</div>
-    		<div class="col-1 menuitem"  style="padding-left: 20px;">
-    			<a href="#" id="research">research</a>
-    		</div>
-<!--            <div class="col-1 menuitem" style="padding-left: 80px;">-->
-<!--                <a href="#" id="cv">cv</a>-->
-<!--            </div>-->
-    		<div class="col-2 menuitem" style="padding-left: 80px;">
-    			<a href="#" id="portfolio">portfolio</a>
-    		</div>
-            <div class="col-2 menuitem" style="padding-left: 40px;">
-                <a href="#" id="project">project</a>
-            </div>
-    		<div class="col-1 menuitem" style="padding-left: 70px;">
-    			<a href="#" id="about2">about</a>
-    		</div>
+			<div style="display: flex; gap: 30px;">
+				<div class="menuitem"><a href="#" id="research">research</a></div>
+				<div class="menuitem"><a href="#" id="portfolio">portfolio</a></div>
+				<div class="menuitem"><a href="#" id="project">project</a></div>
+				<div class="menuitem"><a href="#" id="blog">blog</a></div>
+				<div class="menuitem"><a href="#" id="about">about</a></div>
+			</div>
 		</div>
   	</div>
 </div>
