@@ -16,9 +16,11 @@
 	function loadPage(page, clickedLink) {
 		$(".menuitem a, .myname").removeClass("active");
 		$(clickedLink).addClass("active");
+		$("#footer").fadeOut(150);
 		$("#content").fadeOut(150, function() {
 			$(this).load(page, function() {
 				$(this).fadeIn(200);
+				$("#footer").fadeIn(200);
 			});
 		});
 	}
