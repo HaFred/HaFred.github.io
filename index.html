@@ -36,8 +36,8 @@
 		$("#portfolio").click(function(){ loadPage("portfolio.html", this); });
 		$("#blog").click(function(){ loadPage("blog.html", this); });
 
-		// Intercept links to project/index.html so they load inside #content
-		$(document).on("click", 'a[href="project/index.html"]', function(e) {
+		// Intercept links to project page so they load inside #content
+		$(document).on("click", '.load-project', function(e) {
 			e.preventDefault();
 			loadPage("project/index.html", $("#blog a")[0]);
 		});
