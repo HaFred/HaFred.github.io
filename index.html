@@ -35,6 +35,12 @@
 		$("#research").click(function(){ loadPage("research.html", this); });
 		$("#portfolio").click(function(){ loadPage("portfolio.html", this); });
 		$("#blog").click(function(){ loadPage("blog.html", this); });
+
+		// Intercept links to project/index.html so they load inside #content
+		$(document).on("click", 'a[href="project/index.html"]', function(e) {
+			e.preventDefault();
+			loadPage("project/index.html", $("#blog a")[0]);
+		});
 	});
 </script>
 <meta name="description" content="PhD in Electronics & Computer Engineering at HKUST">
