@@ -14,7 +14,7 @@ body {
 	width: 100%;
 	font-family: 'Crimson Text', serif;
 	font-size: 20px;
-	background: #fcfcfc;
+	background: var(--bg, #fcfcfc);
 }
 h1 {
 	font-family: 'Nunito', sans-serif;
@@ -28,7 +28,7 @@ h2 {
 	font-weight: normal;
 	font-size: 32px;
 	margin: 15px 0px 35px 0px;
-	color: #333;	
+	color: var(--primary, #333);
 	word-spacing: 3px;
 }
 
@@ -37,7 +37,7 @@ h3 {
 	font-weight: normal;
 	font-size: 26px;
 	margin: 10px 0px 10px 0px;
-	color: #333;
+	color: var(--primary, #333);
 	word-spacing: 2px;
 }
 h4 {
@@ -45,7 +45,7 @@ h4 {
 	font-weight: normal;
 	font-size: 22px;
 	margin: 10px 0px 10px 0px;
-	color: #333;
+	color: var(--primary, #333);
 	word-spacing: 2px;
 }
 
@@ -54,16 +54,16 @@ h5 {
 	font-weight: normal;
 	font-size: 18px;
 	margin: 10px 0px 10px 0px;
-	color: #111;
+	color: var(--primary, #111);
 	word-spacing: 2px;
 }
 
 p, li {
-	color: #444;
+	color: var(--primary, #444);
 }
 
 a {
-	color: #DE3737;
+	color: var(--secondary, #DE3737);
 }
 
 .container {
@@ -72,14 +72,14 @@ a {
 }
 
 #header {
-	background: #fff;
+	background: var(--bg, #fff);
 	width: 100%;
-	color: #9FAFAF;
+	color: var(--secondary, #9FAFAF);
     font-family: small-caps;
 }
 
 #headersub {
-	color: #ccc;
+	color: var(--secondary, #ccc);
 	width: 960px;
 	margin: 0px auto 0px auto;
 	padding: 20px 0px 20px 0px;
@@ -90,13 +90,13 @@ a {
 }
 .lol {
 	font-size: 16px;
-	color: #888;
+	color: var(--secondary, #888);
 	font-style: italic;
 }
 .sep {
 	height: 1px;
 	width: 100%;
-	background: #999;
+	background: var(--secondary, #999);
 	margin: 20px 0px 20px 0px;
 }
 .footer{

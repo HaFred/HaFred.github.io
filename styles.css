@@ -1,10 +1,32 @@
+/* Color scheme */
+:root {
+	--bg: #ffffff;
+	--primary: #2F4F4F;
+	--secondary: #9FAFAF;
+	--border: #D8E0E0;
+	--overlay-bg: #000000;
+	--overlay-bg-alt: #2F4F4F;
+	--hover-color: black;
+}
+
+.dark {
+	--bg: rgb(29, 30, 32);
+	--primary: rgb(218, 218, 219);
+	--secondary: rgb(155, 156, 157);
+	--border: rgb(51, 51, 51);
+	--overlay-bg: #000000;
+	--overlay-bg-alt: rgb(46, 46, 51);
+	--hover-color: #ffffff;
+}
+
 /* Sticky header */
 #header {
 	position: sticky;
 	top: 0;
-	background: #fff;
+	background: var(--bg);
 	z-index: 100;
 	padding-top: 40px;
+	transition: background-color 0.3s;
 }
 
 .menubar {
@@ -21,12 +43,12 @@
 }
 
 .myname {
-	font-size: 22px; 
+	font-size: 22px;
 	font-variant: small-caps;
 	font-weight: normal;
 	transform: scale(1, 1.2);
 	letter-spacing: 0.15em;
-	color: #2F4F4F !important;
+	color: var(--primary) !important;
 	float:left;
 	text-align:left;
 }
@@ -52,7 +74,7 @@
 	height: 1px;
 	bottom: -2px;
 	left: 0;
-	background-color: #2F4F4F;
+	background-color: var(--primary);
 	transition: width 0.25s ease;
 }
 
@@ -62,7 +84,7 @@
 
 /* Active nav state */
 .menuitem a.active {
-	color: #2F4F4F;
+	color: var(--primary);
 }
 
 .menuitem a.active::after {
@@ -82,7 +104,7 @@
 	font-weight: lighter;
 	font-variant: small-caps;
 	line-height:1.2em;
-	color:#9FAFAF;
+	color: var(--secondary);
 }
 
 .container {
@@ -103,7 +125,7 @@
 	width: 200;
 	opacity: 0;
 	transition: 0.5s ease;
-	background-color: #000000;
+	background-color: var(--overlay-bg);
 }
 
 .overlay2 {
@@ -116,7 +138,7 @@
 	width: 266;
 	opacity: 0;
 	transition: 0.5s ease;
-	background-color: #2F4F4F;
+	background-color: var(--overlay-bg-alt);
 }
 
 .overlay3 {
@@ -129,7 +151,7 @@
 	width: 270;
 	opacity: 0;
 	transition: 0.5s ease;
-	background-color: #000000;
+	background-color: var(--overlay-bg);
 }
 
 .container:hover .overlay {
@@ -171,14 +193,14 @@
 }
 
 p {
-	color: #2F4F4F;
+	color: var(--primary);
 	font-weight: lighter;
 	line-height:1.5em;
+	transition: color 0.3s;
 }
 
 a {
-	/*color: #BFBFBF;*/
-	color: #9FAFAF;
+	color: var(--secondary);
 }
 
 /* unvisited link */
@@ -189,14 +211,51 @@ a:link {
 
 /* mouse over link */
 a:hover {
-  color: black;
+  color: var(--hover-color);
   font-weight: lighter;
   text-decoration: none;
 }
 
 /* selected link */
 a:active {
-  color: black;
+  color: var(--hover-color);
   font-weight: lighter;
   text-decoration: none;
+}
+
+/* Body dark mode transition */
+body {
+	background: var(--bg);
+	transition: background-color 0.3s;
+}
+
+/* Theme toggle button */
+#theme-toggle {
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 5px;
+	margin-left: 10px;
+	display: inline-flex;
+	align-items: center;
+	vertical-align: middle;
+}
+
+#theme-toggle svg {
+	width: 20px;
+	height: 20px;
+	stroke: var(--secondary);
+	transition: stroke 0.3s;
+}
+
+#theme-toggle:hover svg {
+	stroke: var(--primary);
+}
+
+body.dark #moon {
+	display: none;
+}
+
+body:not(.dark) #sun {
+	display: none;
 }
