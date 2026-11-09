@@ -31,15 +31,15 @@ Monocular Video</title>
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+        href="../vendor/academicons/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="../favicon.ico">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/jquery-3.5.1.min.js"></script>
   <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  <script defer src="./static/js/bulma-carousel.min.js"></script>
+  <script defer src="./static/js/bulma-slider.min.js"></script>
+  <script defer src="./static/js/index.js"></script>
 </head>
 <body>
 <!--<img src="./imgs/teaser_thumbnail.jpg" width="0" height="0" />-->
@@ -122,13 +122,13 @@ Monocular Video</h1>
   <div class="container is-max-desktop">
     <!-- Animation  -->
     <div class="content has-text-justified">
-        <img class="img-fluid" src="../images/cdrnet.gif" alt="Framework" >
+        <img style="aspect-ratio: 1549 / 762;" class="img-fluid" src="../images/cdrnet.gif" alt="Framework" >
     </div>
     <!-- Topping Video -->
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
         <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/z_krQ0IpxEs?si=74P-lqZHzExm7wGt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          <iframe loading="lazy" src="https://www.youtube.com/embed/z_krQ0IpxEs?si=74P-lqZHzExm7wGt" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
       </div>
     </div>
@@ -164,7 +164,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
 <!--            <div class="column is-four-fifths">-->
             <center><h2 class="title is-3">Overall Pipeline</h2></center>
             <div class="content has-text-justified">
-                <img class="img-fluid" src="./imgs/cdrnet_arch.jpg" alt="Framework" >
+                <picture><source type="image/webp" media="(max-resolution: 2dppx)" srcset="../cdrnet/imgs/cdrnet_arch-1920.webp 1920w" sizes="960px"><img loading="lazy" style="aspect-ratio: 3757 / 792;" class="img-fluid" src="./imgs/cdrnet_arch.jpg" alt="Framework" ></picture>
               <p>
                 Posed RGB images from monocular videos are wrapped as fragment input for 2D feature extraction, which is used for both depth and 2D semantic predictions for cross-dimensional refinement purposes. To learn the foundational 3D geometry before conducting refinements, the extracted 2D features are back-projected into raw 3D features $V_s$ in different resolutions without any 2D priors involved. At each resolution, after being processed by the GRU, the output feature $L_s$ in the local volume is further fed into Depth and Semantics refinement modules sequentially to have a 2D-prior-refined feature with better representations.
               </p>
@@ -181,7 +181,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
           <p>
             Both refinements are conducted in a sparse manner to achieve efficiency. The anchored voxel refinement for occupancy is done by back-projecting depth point predictions and then leveraging as geometric priors.
           </p>
-              <img class="img-fluid" src="./imgs/occ_refmnt.jpg" alt="Framework" >
+              <img loading="lazy" style="aspect-ratio: 2054 / 794;" class="img-fluid" src="./imgs/occ_refmnt.jpg" alt="Framework" >
         </div>
       </div>
       <!--/ Occupancy Refinement. -->
@@ -194,7 +194,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
             <p>
               Semantic priors that lie in the 2D semantic prediction are imposed for the learning of 3D semantics, which is proven to be beneficial to help the feature fit for semantics and easier towards the convergence.
             </p>
-              <img class="img-fluid" src="./imgs/semseg_refmnt.jpg" alt="Framework" >
+              <img loading="lazy" style="aspect-ratio: 2057 / 982;" class="img-fluid" src="./imgs/semseg_refmnt.jpg" alt="Framework" >
           </div>
         </div>
       </div>
@@ -219,9 +219,9 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
         </div>
         <div class="columns is-vcentered interpolation-panel">
           <div class="content has-text-justified">
-            <img src="./imgs/convergence.png"
+            <picture><source type="image/webp" media="(max-resolution: 3dppx)" srcset="../cdrnet/imgs/convergence-1968.webp 1968w, ../cdrnet/imgs/convergence-2952.webp 2952w" sizes="984px"><img loading="lazy" style="aspect-ratio: 5726 / 1766;" src="./imgs/convergence.png"
                  class="interpolation-image"
-            />
+            /></picture>
           </div>
         </div>
         <br/>
@@ -237,7 +237,7 @@ issue, we propose to leverage the latent geometric prior knowledge in 2D image f
         </div>
           <div class="columns is-vcentered interpolation-panel">
           <div class="content has-text-justified">
-            <img src="./imgs/semseg_vis.jpg"
+            <img loading="lazy" style="aspect-ratio: 2920 / 815;" src="./imgs/semseg_vis.jpg"
                  class="interpolation-image"
             />
           </div>
